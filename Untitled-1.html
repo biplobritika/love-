@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Do You Love Me?</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #ffe4ec;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .question-video {
+      width: 200px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #333;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      background-color: #ff4b7d;
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      margin: 10px;
+      font-size: 1.2rem;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    /* Result Page */
+    .result-page {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background-color: #fff0f5;
+      z-index: 10;
+    }
+
+    .heart-pop {
+      font-size: 6rem;
+      color: red;
+      animation: heartPop 1s ease forwards;
+    }
+
+    @keyframes heartPop {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1.4);
+        opacity: 1;
+      }
+    }
+
+    .hug-video {
+      width: 240px; /* Smaller video size */
+      height: auto;
+      border-radius: 15px;
+      margin-top: 25px;
+      opacity: 0;
+      animation: hugFade 1.2s ease forwards;
+      animation-delay: 2.2s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes hugFade {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .i-knew-it {
+      font-size: 2.4rem;
+      color: #e60073;
+      margin-top: 20px;
+      opacity: 0;
+      animation: appearText 1s ease forwards;
+      animation-delay: 3.6s;
+    }
+
+    @keyframes appearText {
+      0% {
+        transform: scale(0.2);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="mainPage">
+    <video class="question-video" autoplay loop muted>
+      <source src="video1.mp4.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <h1>Do you love me?</h1>
+    <div class="buttons">
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
+    </div>
+  </div>
+
+  <div class="result-page" id="resultPage">
+    <div class="heart-pop" id="heart">❤️</div>
+
+    <video class="hug-video" autoplay muted>
+      <source src="hug-couple.mp4.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <div class="i-knew-it">I knew it!</div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const mainPage = document.getElementById('mainPage');
+    const resultPage = document.getElementById('resultPage');
+    const heart = document.getElementById('heart');
+
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    });
+
+    yesBtn.addEventListener('click', () => {
+      mainPage.style.display = 'none';
+      resultPage.style.display = 'flex';
+
+      setTimeout(() => {
+        heart.style.display = 'none';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
